@@ -7,11 +7,12 @@ class Solution:
     #                 return [nums.index(i), nums.index(x)]
 
     def twoSum2(self, nums: list, target: int):
-        x=list(nums)
         for i in nums:
-            x.remove(i)
-            if target-i in x:
-                return [nums.index(i), nums.index(target-i)]
+            if target-i in nums[nums.index(i)+1:]:
+                if target-i == i:
+                    return [nums.index(i), len(nums)-(nums[::-1].index(i)+1)]
+                else:
+                    return [nums.index(i), nums.index(target-i)]
     # def twoSum3(self, nums: list, target: int):
     #     x = []
     #     for i in nums:
@@ -40,7 +41,7 @@ answer = Solution()
 # time1 = time.perf_counter()
 # print(answer.twoSum(dataset,10000))
 # time2 = time.perf_counter()
-print(answer.twoSum2([3,3],6))
+print(answer.twoSum2([2,7,11,15],9))
 # time3 = time.perf_counter()
 # print(answer.twoSum3(dataset,10000))
 # time4 = time.process_time()
