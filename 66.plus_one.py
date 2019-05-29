@@ -3,26 +3,36 @@
 import os
 import psutil
 
+#Uses 13.2 MB, which is better than 30% of users. However, it used to take up 13.6, and was only better than 5%... Other times it's 80%. So, I'm guessing that the test case differs.
+# class Solution():
+#     def plusOne(self,nums):
+#         for i in range(1, len(nums)+1):
+#             print(i)
+#             if nums[-i]+1 != 10:
+#                 nums[-i] += 1
+#                 return nums
+#             elif i == len(nums):
+#                 nums[-i] = 0
+#                 return [1] + nums
+#             else:
+#                 nums[-i] = 0
+#         return nums
+#
 
-class Solution():
+#Below uses around 13.1MB, which I guess is noticeably less than the other one. THis solution beats out 77.17% of other users
+class Solution2():
     def plusOne(self,nums):
-        for i in range(1, len(nums)+1):
-            print(i)
-            if nums[-i]+1 != 10:
-                nums[-i] += 1
-                return nums
-            elif i == len(nums):
-                nums[-i] = 0
-                return [1] + nums
-            else:
-                nums[-i] = 0
-        return nums
+        mapped = map(lambda x: str(x), nums)
+        num = ''.join(mapped)
+        num = int(num)+1
+        num_list = list(str(num))
+        num_list_mapped = map(lambda x: int(x), num_list)
+        return list(num_list_mapped)
 
-test = Solution()
-print(test.plusOne([9,9,9]))
+test = Solution2()
+print(test.plusOne([9,9,9,9,9,9,9,9,9]))
 process = psutil.Process(os.getpid())
 print(process.memory_info().rss)
-
 
 
 # if last number == 10
