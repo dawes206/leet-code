@@ -1,5 +1,7 @@
 # input: [1,2,3]
 # output: [1,2,4]
+import os
+import psutil
 
 
 class Solution():
@@ -18,7 +20,8 @@ class Solution():
 
 test = Solution()
 print(test.plusOne([9,9,9]))
-
+process = psutil.Process(os.getpid())
+print(process.memory_info().rss)
 
 
 
