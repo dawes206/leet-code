@@ -18,19 +18,40 @@ class Solution:
         temp = answer
         templ1 = l1
         templ2 = l2
-        while templ1:
-            temp.val = templ1.val + templ2.val
-            temp.next = ListNode(None)
-            temp = temp.next
-            templ1 = templ1.next
-            templ2 = templ2.next
+        carryOver = False
+        counter = 0
+        while (templ1 or templ2) and counter<=5:
+            temp.next = None
+            if templ1 == None:
+                temp.val = templ2.val
+                templ2 = templ2.next
+            elif templ2 == None:
+                temp.val = templ1.val
+                templ1 = templ1.next
+            else:
+                temp.val = templ1.val + templ2.val
+                templ1 = templ1.next
+                templ2 = templ2.next
+            if carryOver == True:
+                temp.val = temp.val + 1
+                carryOver = False
+            if temp.val >= 10:
+                temp.val = temp.val - 10
+                carryOver = True
+
+            if templ1 == None and templ2 == None:
+                temp.next = None
+            else:
+                temp.next = ListNode(None)
+                temp = temp.next
+            counter += 1
         return(answer)
 
 
 
 
 #for each value in provided list, l1.val = current value, l1.next = next value
-number = [2,4,3]
+number = [4,3]
 head = ListNode(number[0])
 temp = head
 # head.next = ListNode(None)
@@ -60,5 +81,8 @@ for place in range(len(number)):
 
 
 test = Solution()
-print(test.addTwoNumbers(head, head2).next.next.next.val)
+answer = test.addTwoNumbers(head,head2)
+print(answer.val,
+      answer.next.val,
+      answer.next.next.val)
 # print(head.val, '->', head.next.val, '->',head.next.next.val)
