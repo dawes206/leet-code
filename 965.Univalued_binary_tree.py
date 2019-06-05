@@ -11,15 +11,18 @@ class Solution:
             return True
         if not treeRoot.left and not treeRoot.right:
             return True
-        if treeRoot.val != treeRoot.left.val or treeRoot.val != treeRoot.right.val:
-            return False
-        else:
-            left = self.traveler(treeRoot.left)
-            right = self.traveler(treeRoot.right)
-            if left and right:
-                return True
-            else:
+        if not treeRoot.left:
+            if treeRoot.val != treeRoot.left:
+                left = self.traveler(treeRoot.left)
                 return False
+        if not treeRoot.right:
+            if treeRoot.val != treeRoot.right:
+                right = self.traveler(treeRoot.right)
+                return False
+        if left and right:
+            return True
+        else:
+            return False
 
     # def helper(self, root):
     #     num = [0]
