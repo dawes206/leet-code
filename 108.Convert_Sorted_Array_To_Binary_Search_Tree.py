@@ -32,9 +32,12 @@
 # queue.enqueue(node.left)
 # queue.enqueue(node.right)
 # number += 2
+
+
+
 #recursive
 # def helper(self, length, number, queue): #length is length of input list
-#     if number>length:
+#     if number>length-1:
 #          return
 #     else:
 #         node = queue.dequeue()
@@ -42,21 +45,19 @@
 #         node.right = TreeNode(None)
 #         queue.enqueue(node.left)
 #         queue.enqueue(node.right)
-#         self.helper()
+#         number += 2
+#         self.helper(length, number, queue)
+#
+# #populating tree
+# #recursive
+# def dfs(self, number, nums):
+#     if not node.left and not node.right: #if node has no children assigned
+#         node.val = nums[number]
+#         number +=1
+#         return
+#     else:
+#         self.dfs(number, nums)
 
-#populating tree
-#iterative
-while num<= len(nums):
-
-
-#recursive
-def dfs(self, number, nums):
-    if not node.left and not node.right: #if node has no children assigned
-        node.val = nums[number]
-        number +=1
-        return
-    else:
-        self.dfs(number, nums)
 
 #iterative
 # stack.push(root) #a stack so you can see the most recent node you've traversed (parent) and choose it's other child
@@ -81,17 +82,81 @@ def dfs(self, number, nums):
 
 
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
 # List = [-10,-3,0,5,9]
 
 
 class Solution:
-    def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
+    def sortedArrayToBST(self, nums) -> TreeNode:
+        root = TreeNode(None)
+        queue = []
+        # queue.enqueue(root)
+        queue.append(root)
+        self.helper(root, len(nums), 0, queue)
+        self.dfs(root, 0, nums)
+        return root
 
-    def createTree(self,List):
-        height =
+
+    def helper(self, node, length, number, queue): #length is length of input list
+        if number>length-1:
+             return
+        else:
+            # node = queue.dequeue()
+            # print(len(queue))
+            node = queue.pop(0)
+            node.left = TreeNode(None)
+            node.right = TreeNode(None)
+            # queue.enqueue(node.left)
+            # queue.enqueue(node.right)
+            queue.append(node.left)
+            queue.append(node.right)
+            number += 2
+            self.helper(node, length, number, queue)
+
+    def dfs(self, node, number, nums):
+        if not node.left and not node.right: #if node has no children assigned (leaf)
+            node.val = nums[number]
+            number +=1
+            return
+        elif node.left.val and not node.val: #if left child has value but node has no value, assign value to node
+            node.val = nums[number]
+            number +=1
+            return
+        elif node.left.val and node.val and not node.right.val: #if both left child and node has value, assign value to right child (through dfs)
+            print('here')
+            self.dfs(node.right,number,nums)
+        else: #left, right, and node have value
+            return
+
+
+test = Solution()
+ans = test.sortedArrayToBST([-10,-3,0,5,9])
+print(ans.val)
+# print(ans.left.val)
+# print(ans.right.val)
+# print(ans.left.left.val)
+# print(ans.left.right.val)
+# print(ans..val)
+# print(ans..val)
+# print(ans..val)
+# print(ans..val)
+# print(ans..val)
+# print(ans..val)
+# print(ans..val)
+
+# print(ans.left.left)
+# print(ans)
+# def graph_print(ans):
+#     global visited
+#     if node not in visited:
+#         visited.append(node)
+#         for n in graph[node]:
+#             dfs(graph,n)
+# print(ans)
+# graph_print(ans)
+# print(visited)
