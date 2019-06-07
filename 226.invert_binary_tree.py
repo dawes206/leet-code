@@ -17,6 +17,12 @@ class TreeNode:
         self.val = x
         self.left = None
         self.right = None
+    def PrintTree(self):
+        if self.left:
+            self.left.PrintTree()
+        print(self.val),
+        if self.right:
+            self.right.PrintTree()
 
 class Solution:
     def invertTree(self, root: TreeNode) -> TreeNode:
