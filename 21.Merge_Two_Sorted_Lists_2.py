@@ -23,7 +23,7 @@ class Solution:
         elif right:
             print('right is not none')
             node.next = right
-        return root
+        return root.next
 
 
 L = ListNode(1)
